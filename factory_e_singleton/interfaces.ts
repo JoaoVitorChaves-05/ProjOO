@@ -11,7 +11,7 @@ interface IPushNotificationService {
 }
 
 interface IMessageFactory {
-    createNotificationService(type: string): IEmailService | ISMSService | IPushNotificationService;
+    createMessageService(type: string): IEmailService | ISMSService | IPushNotificationService;
 }
 
 export type { IEmailService, ISMSService, IPushNotificationService, IMessageFactory };
