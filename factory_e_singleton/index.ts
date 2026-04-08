@@ -37,7 +37,7 @@ class GlobalSingleton {
 
 
 class MessageFactory implements IMessageFactory {
-    createNotificationService(type: string): IEmailService | ISMSService | IPushNotificationService {
+    createMessageService(type: string): IEmailService | ISMSService | IPushNotificationService {
         switch (type) {
             case "email":
                 return new EmailService();
@@ -57,13 +57,13 @@ function main() {
 
     const messageFactory = new MessageFactory();
 
-    const emailService = messageFactory.createNotificationService("email") as IEmailService;
+    const emailService = messageFactory.createMessageService("email") as IEmailService;
     emailService.sendEmail("joao@gmail", "Hello", "Hello world");
 
-    const smsService = messageFactory.createNotificationService("sms") as ISMSService;
+    const smsService = messageFactory.createMessageService("sms") as ISMSService;
     smsService.sendSMS("11999999999", "Hello world");
 
-    const pushNotificationService = messageFactory.createNotificationService("push") as IPushNotificationService;
+    const pushNotificationService = messageFactory.createMessageService("push") as IPushNotificationService;
     pushNotificationService.sendPushNotification("joao", "Hello world");
 }
 
