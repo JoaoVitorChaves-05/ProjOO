@@ -18,6 +18,3 @@ As implementações incluem um `SendSMSAdapter` (adapta `SomeAPI` para `ISender`
 ----
 
 Atualizado em 10/04/2026.
-----
-
-Atualizado em 10/04/2026.
