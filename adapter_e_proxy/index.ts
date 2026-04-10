@@ -155,6 +155,11 @@ function main() {
     } catch (error) {
         console.log(error);
     }
+
+    // Liberando as instancias para criar novas
+    messageFactoryProxy.releaseMessageService('email');
+    messageFactoryProxy.releaseMessageService('push');
+    messageFactoryProxy.releaseMessageService('sms');
 }
 
 main();
