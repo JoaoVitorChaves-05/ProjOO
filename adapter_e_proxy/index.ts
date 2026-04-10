@@ -53,25 +53,35 @@ class MessageFactory implements IMessageFactory {
 
 class MessageFactoryProxy implements IMessageFactoryProxy {
     private messageFactory: IMessageFactory;
+    private instanceCount: number[] = [0, 0, 0]; // email, sms, push
 
     constructor() {
-        this.messageFactory = new MessageFactory()
+        this.messageFactory = new MessageFactory();
+        this.instanceCount = [0, 0, 0];
     }
 
     createMessageService(type: string): IEmailService | ISMSService | IPushNotificationService {
-        switch (type) {
-            case "email":
-                console.log("Instância de e-mail criada em ", new Date().toString())
-                return this.messageFactory.createMessageService('email');
-            case "sms":
-                console.log("Instância de SMS criada em ", new Date().toString())
-                return this.messageFactory.createMessageService('sms');
-            case "push":
-                console.log("Instância de Push Notification criada em ", new Date().toString())
-                return this.messageFactory.createMessageService('push');
-            default:
-                throw new Error(`Unknown notification type: ${type}`);
+        const types = ['email', 'sms', 'push'];
+        if (!types.includes(type)) {
+            console.log(`Invalid message type: ${type}`);
+            throw new Error(`Unknown notification type: ${type}`);
         }
+
+        const typeIndex = types.indexOf(type);
+        
+        if (typeIndex < 0 || typeIndex >= this.instanceCount.length) {
+            console.log(`Invalid message type index for: ${type}`);
+            throw new Error(`Unknown notification type: ${type}`);
+        }
+
+        const count = this.instanceCount[typeIndex]!;
+        if (count >= 1) {
+            throw new Error(`Too many instances of ${type} service created. Please try again later.`);
+        }
+
+        const service = this.messageFactory.createMessageService(type);
+        this.instanceCount[typeIndex] = count + 1;
+        return service;
     }
 }
 
@@ -84,13 +94,12 @@ class SomeAPI implements ISomeAPI {
 class SendSMSAdapter implements ISender {
 
     private someAPI: ISomeAPI;
-
-    constructor() {
-        this.someAPI = new SomeAPI();
+    constructor(someAPI?: ISomeAPI) {
+        this.someAPI = someAPI ?? new SomeAPI();
     }
 
     public send(from: string, to: string, message: string) {
-        this.someAPI.sendSomeMessage(from, to, message)
+        this.someAPI.sendSomeMessage(from, to, message);
     }
 }
 
@@ -110,7 +119,7 @@ function main() {
     pushNotificationService.sendPushNotification("joao", "Hello world");
 
     // Teste da nova implementação de adapter
-    const externalAPI: SendSMSAdapter = new SendSMSAdapter();
+    const externalAPI: SendSMSAdapter = new SendSMSAdapter(new SomeAPI());
     externalAPI.send("11999999999", "12999999999", "Hello, world!");
 
     // Teste da nova implementação de proxy
@@ -118,6 +127,13 @@ function main() {
     messageFactoryProxy.createMessageService('email');
     messageFactoryProxy.createMessageService('sms');
     messageFactoryProxy.createMessageService('push')
+
+    // Teste da nova implementação de proxy com limite de instancias
+    try {
+        messageFactoryProxy.createMessageService('email');
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 main();
