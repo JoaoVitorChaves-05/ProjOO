@@ -83,6 +83,27 @@ class MessageFactoryProxy implements IMessageFactoryProxy {
         this.instanceCount[typeIndex] = count + 1;
         return service;
     }
+
+    releaseMessageService(type: string): void {
+        const types = ['email', 'sms', 'push'];
+        if (!types.includes(type)) {
+            console.log(`Invalid message type: ${type}`);
+            throw new Error(`Unknown notification type: ${type}`);
+        }
+
+        const typeIndex = types.indexOf(type);
+        if (typeIndex < 0 || typeIndex >= this.instanceCount.length) {
+            console.log(`Invalid message type index for: ${type}`);
+            throw new Error(`Unknown notification type: ${type}`);
+        }
+
+        const count = this.instanceCount[typeIndex]!;
+        if (count <= 0) {
+            throw new Error(`No instances of ${type} service created. Please try again later.`);
+        }
+
+        this.instanceCount[typeIndex] = count - 1;
+    }
 }
 
 class SomeAPI implements ISomeAPI {
