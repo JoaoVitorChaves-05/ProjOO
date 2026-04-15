@@ -15,6 +15,14 @@ Implementação em TypeScript dos padrões de projeto Adapter e Proxy. Veja [ada
 
 As implementações incluem um `SendSMSAdapter` (adapta `SomeAPI` para `ISender`) e um `MessageFactoryProxy` (validação e controle simples de criação).
 
+## Atividade 3 (14/04/2026)
+
+Implementação em TypeScript dos padrões de projeto Fachada (Facade) e Decorator. Veja [fachada_e_decorator/index.ts](fachada_e_decorator/index.ts) e [fachada_e_decorator/interfaces.ts](fachada_e_decorator/interfaces.ts).
+
+As implementações incluem uma `HomeTheater` (fachada para operações de entretenimento) e os decoradores de bebida (`CafeExpresso`, `Cappuccino`, `Cha` com ingredientes adicionais).
+
+Também foram adicionados testes unitários com Jest para validar os comportamentos principais da atividade. Veja [fachada_e_decorator/index.test.ts](fachada_e_decorator/index.test.ts).
+
 ----
 
-Atualizado em 10/04/2026.
+Atualizado em 14/04/2026.
