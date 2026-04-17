@@ -23,6 +23,14 @@ As implementações incluem uma `HomeTheater` (fachada para operações de entre
 
 Também foram adicionados testes unitários com Jest para validar os comportamentos principais da atividade. Veja [fachada_e_decorator/index.test.ts](fachada_e_decorator/index.test.ts).
 
+## Atividade 4 (17/04/2026)
+
+Implementação em TypeScript do padrão de projeto Observer. Veja [observers/index.ts](observers/index.ts) e [observers/interfaces.ts](observers/interfaces.ts).
+
+As implementações incluem um `PCD_Subject` (sujeito que mantém e notifica estado de temperatura, umidade e pH) e um `UniversityObserver` (observador que recebe e registra as atualizações do sujeito).
+
+Também foram adicionados testes unitários com Jest para validar os comportamentos principais da atividade, incluindo cenários com múltiplos PCDs e observadores. Veja [observers/index.test.ts](observers/index.test.ts).
+
 ----
 
-Atualizado em 14/04/2026.
+Atualizado em 17/04/2026.
