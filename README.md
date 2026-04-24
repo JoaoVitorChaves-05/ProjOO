@@ -31,6 +31,14 @@ As implementações incluem um `PCD_Subject` (sujeito que mantém e notifica est
 
 Também foram adicionados testes unitários com Jest para validar os comportamentos principais da atividade, incluindo cenários com múltiplos PCDs e observadores. Veja [observers/index.test.ts](observers/index.test.ts).
 
+## Atividade 5 (24/04/2026)
+
+Implementação em TypeScript do princípio de Inversão de Controle (IoC). Veja [inversao_de_controle/index.ts](inversao_de_controle/index.ts) e [inversao_de_controle/interfaces.ts](inversao_de_controle/interfaces.ts).
+
+As implementações incluem um `PCD` (sensor que mantém estado de temperatura, umidade e pH) e uma `University` (observador que recebe e registra as atualizações). O PCD mantém o controle sobre quando e como os observadores são notificados, enquanto os observadores dependem do PCD para receber as atualizações, seguindo o princípio de inversão de controle.
+
+Também foram adicionados testes unitários com Jest para validar todos os comportamentos da atividade, cobrindo registro/remoção de observadores, notificações com diferentes tipos de dados e cenários de integração. Veja [inversao_de_controle/index.test.ts](inversao_de_controle/index.test.ts).
+
 ----
 
-Atualizado em 17/04/2026.
+Atualizado em 24/04/2026.
