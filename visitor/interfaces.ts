@@ -1,16 +1,16 @@
-interface Report_HTML extends Report {
+interface Report_Sales extends Report {
 }
 
-interface Report_PDF extends Report {
+interface Report_Inventory extends Report {
 }
 
-interface Report_Excel extends Report {
+interface Report_Finance extends Report {
 }
 
 interface Visitor {
-    visitHTML(report: Report_HTML): void;
-    visitPDF(report: Report_PDF): void;
-    visitExcel(report: Report_Excel): void;
+    visitSales(report: Report_Sales): string;
+    visitInventory(report: Report_Inventory): string;
+    visitFinance(report: Report_Finance): string;
 }
 
 abstract class Report {
@@ -24,20 +24,8 @@ abstract class Report {
         this.date = new Date();
     }
 
-    abstract accept(visitor: Visitor): void;
+    abstract accept(visitor: Visitor): string;
 }
 
-abstract class ReportType implements Report {
-    public title: string;
-    public content: string[]
-    private date: Date;
-
-    constructor(title: string) {
-        this.title = title;
-        this.content = [];
-        this.date = new Date();
-    }
-}
-
-export type { Visitor, Report_HTML, Report_PDF, Report_Excel };
+export type { Visitor, Report_Sales, Report_Inventory, Report_Finance };
 export { Report };

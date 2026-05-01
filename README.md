@@ -39,6 +39,14 @@ As implementações incluem um `PCD` (sensor que mantém estado de temperatura, 
 
 Também foram adicionados testes unitários com Jest para validar todos os comportamentos da atividade, cobrindo registro/remoção de observadores, notificações com diferentes tipos de dados e cenários de integração. Veja [inversao_de_controle/index.test.ts](inversao_de_controle/index.test.ts).
 
+## Atividade 6 (01/05/2026)
+
+Implementação em TypeScript do padrão de projeto Visitor. Veja [visitor/index.ts](visitor/index.ts) e [visitor/interfaces.ts](visitor/interfaces.ts).
+
+As implementações incluem três tipos de relatório (`SalesReport`, `InventoryReport`, `FinanceReport`) e três conversores de formato (`HtmlVisitor`, `PdfVisitor`, `ExcelVisitor`).
+
+Também foram adicionados testes unitários com Jest para validar as conversões entre os formatos. Veja [visitor/index.test.ts](visitor/index.test.ts).
+
 ----
 
-Atualizado em 24/04/2026.
+Atualizado em 01/05/2026.
