@@ -7,7 +7,7 @@ interface MessagerMediator {
 interface Colleague {
     name: string;
     mediator: MessagerMediator;
-    send(message: string, sender: Colleague): void;
+    send(message: string): void;
     receive(message: string, sender: Colleague): void;
     exit(): void;
 }

@@ -67,4 +67,44 @@ describe('Mediator Pattern - ConcreteMediator and ConcreteColleague', () => {
         expect(logSpy).toHaveBeenCalledTimes(1);
         expect(logSpy).toHaveBeenCalledWith('Ana: Ping');
     });
+
+    test('deve incluir o remetente no broadcast', () => {
+        const logSpy = jest.spyOn(console, 'log').mockImplementation(() => undefined);
+
+        colleague1 = new ConcreteColleague('Ana', mediator);
+        colleague2 = new ConcreteColleague('Bruno', mediator);
+        const colleague3 = new ConcreteColleague('Carla', mediator);
+
+        logSpy.mockClear();
+
+        colleague2.send('Mensagem geral');
+
+        expect(logSpy).toHaveBeenCalledTimes(3);
+        expect(logSpy).toHaveBeenNthCalledWith(1, 'Bruno: Mensagem geral');
+        expect(logSpy).toHaveBeenNthCalledWith(2, 'Bruno: Mensagem geral');
+        expect(logSpy).toHaveBeenNthCalledWith(3, 'Bruno: Mensagem geral');
+
+        colleague3.exit();
+    });
+
+    test('deve permitir reentrada de colega apos saida', () => {
+        const logSpy = jest.spyOn(console, 'log').mockImplementation(() => undefined);
+
+        colleague1 = new ConcreteColleague('Ana', mediator);
+        colleague2 = new ConcreteColleague('Bruno', mediator);
+
+        logSpy.mockClear();
+
+        colleague2.exit();
+
+        logSpy.mockClear();
+
+        const colleague2Rejoin = new ConcreteColleague('Bruno', mediator);
+
+        expect(logSpy).toHaveBeenCalledTimes(2);
+        expect(logSpy).toHaveBeenNthCalledWith(1, 'Bruno: Bruno has joined the chat.');
+        expect(logSpy).toHaveBeenNthCalledWith(2, 'Bruno: Bruno has joined the chat.');
+
+        colleague2Rejoin.exit();
+    });
 });
