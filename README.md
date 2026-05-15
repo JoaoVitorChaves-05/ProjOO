@@ -47,6 +47,14 @@ As implementações incluem três tipos de relatório (`SalesReport`, `Inventory
 
 Também foram adicionados testes unitários com Jest para validar as conversões entre os formatos. Veja [visitor/index.test.ts](visitor/index.test.ts).
 
+## Atividade 7 (15/05/2026)
+
+Implementação em TypeScript do padrão de projeto Mediator. Veja [mediator/index.ts](mediator/index.ts) e [mediator/interfaces.ts](mediator/interfaces.ts).
+
+As implementações incluem um `ConcreteMediator` (gerenciador de mensagens entre colegas) e um `ConcreteColleague` (participante do chat que envia e recebe mensagens via mediador).
+
+Também foram adicionados testes unitários com Jest para validar anúncios de entrada/saída, envio para todos os colegas e remoção de participantes. Veja [mediator/index.test.ts](mediator/index.test.ts).
+
 ----
 
-Atualizado em 01/05/2026.
+Atualizado em 15/05/2026.
